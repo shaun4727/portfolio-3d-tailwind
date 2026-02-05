@@ -1,22 +1,9 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-    --gutter-size: 128px;
-    --gutter-size-regular: 10vw;
-    --gutter-size-larger: 20vw;
-    --font-size-regular-smaller-screen: 16px;
-    --font-size-regular-larger-screen: 24px;
-    --margin-section-regular: 32px;
-    --flex-gap-elements: 7px;
-    --margin-elements-regular: 15px;
-    --flex-gap-regular: 15px;
-    --border-radius-regular: 15px;
-    --padding-regular: 15px;
-    --primary-color: #034c53;
-    --button-color: #e27126;
     --radius: 0.625rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
@@ -92,6 +79,24 @@
     --radius-2xl: calc(var(--radius) + 8px);
     --radius-3xl: calc(var(--radius) + 12px);
     --radius-4xl: calc(var(--radius) + 16px);
+    --spacing-gutter: 128px;
+    --spacing-sm-gutter: 24px;
+    --spacing-gutter-regular: 10vw;
+    --spacing-gutter-larger: 20vw;
+    --font-size-base: 1rem;
+    --font-size-large: 1.25rem;
+    --font-size-larger: 1.75rem;
+    --font-size-display: 2rem;
+    --spacing-margin-section-regular: 32px;
+    --spacing-margin-section-large: 96px;
+    --spacing-flex-gap-elements: 7px;
+    --spacing-margin-elements-regular: 15px;
+    --spacing-margin-sm: 12px;
+    --spacing-flex-gap-regular: 15px;
+    --spacing-border-radius-regular: 15px;
+    --spacing-padding-regular: 15px;
+    --color-primary-color: #034c53;
+    --color-button-color: #e27126;
 }
 
 .dark {
@@ -129,10 +134,10 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
+    body {
+        @apply bg-background text-foreground;
     }
 }
