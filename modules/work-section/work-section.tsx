@@ -72,45 +72,49 @@ export const WorkSection = () => {
                 '-=0.2',
             );
 
-            gsap.set('.project-image', {
-                display: 'block',
-                position: 'relative',
-                zIndex: 1,
-            });
-
+            const mm = gsap.matchMedia();
             const cards = gsap.utils.toArray('.image-card');
 
-            cards.forEach((card) => {
-                const el = card as HTMLElement;
-                const img = el.querySelector('.project-image');
-
-                if (!img) return;
-
-                // Simple scale animation centered on the image's original position
-                const hoverAnim = gsap.to(el, {
-                    scale: 1.6,
-                    zIndex: 100,
-                    duration: 0.5,
-                    paused: true,
-                    ease: 'power2.out',
-                    // transformOrigin: "center center" is default,
-                    // but you can specify it if needed
-                    transformOrigin: 'center center',
-                });
-
-                el.addEventListener('mouseenter', () => {
-                    // We raise the z-index of the whole card container so the
-                    // scaled image overlaps neighboring cards
-                    gsap.set(el, { zIndex: 50 });
-                    hoverAnim.play();
-                });
-
-                el.addEventListener('mouseleave', () => {
-                    // Reset z-index so it returns to the normal document flow
-                    gsap.set(el, { zIndex: 1 });
-                    hoverAnim.reverse();
-                });
+            mm.add('(max-width: 768px)', () => {
+                // Mobile logic: Small scale
+                setupCardAnimations(1.1);
             });
+
+            mm.add('(min-width: 769px)', () => {
+                // Desktop logic: Larger scale
+                setupCardAnimations(1.6);
+            });
+
+            function setupCardAnimations(scaleValue: number) {
+                cards.forEach((card) => {
+                    const el = card as HTMLElement;
+                    const hoverAnim = gsap.to(el, {
+                        scale: scaleValue,
+                        duration: 0.5,
+                        paused: true,
+                        ease: 'power2.out',
+                        transformOrigin: 'center center',
+                    });
+
+                    const onEnter = () => {
+                        gsap.set(el, { zIndex: 50 });
+                        hoverAnim.play();
+                    };
+                    const onLeave = () => {
+                        gsap.set(el, { zIndex: 1 });
+                        hoverAnim.reverse();
+                    };
+
+                    el.addEventListener('mouseenter', onEnter);
+                    el.addEventListener('mouseleave', onLeave);
+
+                    // MatchMedia cleanup: automatically removes listeners when screen resizes
+                    return () => {
+                        el.removeEventListener('mouseenter', onEnter);
+                        el.removeEventListener('mouseleave', onLeave);
+                    };
+                });
+            }
         },
         { scope: sectionRef },
     );
