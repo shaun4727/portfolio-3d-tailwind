@@ -160,8 +160,8 @@ export const WorkSection = () => {
                         src="/images/project-img.png"
                         alt="project-thumbnail"
                         className="w-80 md:w-100 project-image"
-                        width="100"
-                        height="100"
+                        width="800"
+                        height="600"
                     />
                     <div className="mt-margin-elements-regular">
                         {' '}
@@ -186,8 +186,8 @@ export const WorkSection = () => {
                         src="/images/project-img.png"
                         alt="project-thumbnail"
                         className="w-80 md:w-100 project-image"
-                        width="100"
-                        height="100"
+                        width="800"
+                        height="600"
                     />
                     <div className="mt-margin-elements-regular">
                         {' '}
@@ -212,8 +212,8 @@ export const WorkSection = () => {
                         src="/images/project-img.png"
                         alt="project-thumbnail"
                         className="w-80 md:w-100 project-image"
-                        width="100"
-                        height="100"
+                        width="800"
+                        height="600"
                     />
                     <div className="mt-margin-elements-regular">
                         {' '}
@@ -238,8 +238,8 @@ export const WorkSection = () => {
                         src="/images/project-img.png"
                         alt="project-thumbnail"
                         className="w-80 md:w-100 project-image"
-                        width="100"
-                        height="100"
+                        width="800"
+                        height="600"
                     />
                     <div className="mt-margin-elements-regular">
                         {' '}
@@ -264,8 +264,8 @@ export const WorkSection = () => {
                         src="/images/project-img.png"
                         alt="project-thumbnail"
                         className="w-80 md:w-100 project-image"
-                        width="100"
-                        height="100"
+                        width="800"
+                        height="600"
                     />
                     <div className="mt-margin-elements-regular">
                         {' '}
