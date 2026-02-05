@@ -120,8 +120,8 @@ export const HeroSection = () => {
                     <Image
                         src="/images/profile-img-group.png"
                         alt="hero-thumbnail"
-                        width="100"
-                        height="100"
+                        width="300"
+                        height="300"
                         className="w-3/4 md:w-160 "
                     />
                 </div>
