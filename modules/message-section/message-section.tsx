@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
@@ -201,6 +202,9 @@ export const MessageSection = () => {
                                 ></textarea>
                             </div>
                         </div>
+                        <Button className="bg-button-color w-full hover:bg-primary-color transition-colors duration-300">
+                            Send Message
+                        </Button>
                     </div>
                 </section>
             </div>
