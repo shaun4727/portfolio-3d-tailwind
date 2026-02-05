@@ -22,7 +22,7 @@ export const NavBar = () => {
         <div>
             {' '}
             {!isMobile ? (
-                <NavigationMenu className=" flex justify-end min-w-full px-gutter">
+                <NavigationMenu className="hidden justify-end min-w-full px-gutter">
                     <NavigationMenuList className="flex gap-6 py-2">
                         <NavigationMenuItem>Home</NavigationMenuItem>
                         <NavigationMenuItem>Blog</NavigationMenuItem>
@@ -30,7 +30,7 @@ export const NavBar = () => {
                     </NavigationMenuList>
                 </NavigationMenu>
             ) : (
-                <div>
+                <div className="hidden">
                     <Drawer direction="left">
                         <DrawerTrigger asChild>
                             <Button
