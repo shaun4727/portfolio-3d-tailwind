@@ -1,15 +1,93 @@
+'use client';
+
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+
 import { Mail, MessageSquareText } from 'lucide-react';
 import Image from 'next/image';
+import { useRef } from 'react';
+
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(SplitText, ScrambleTextPlugin);
+}
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const MessageSection = () => {
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const boxRef = useRef<HTMLDivElement>(null);
+
+    useGSAP(
+        () => {
+            const split = new SplitText('.contact-header', {
+                type: 'chars, words',
+            });
+            const contactCards = gsap.utils.toArray(boxRef.current!.children);
+
+            // 1. Setup initial states
+            gsap.set(split.chars, { display: 'inline', position: 'relative' });
+
+            // 2. Create a single Timeline
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current, // Triggering based on the section
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                },
+            });
+
+            // 3. Add Scramble Animation (Loop)
+            split.chars.forEach((char) => {
+                const htmlChar = char as HTMLElement;
+                tl.to(
+                    htmlChar,
+                    {
+                        duration: 0.5,
+                        scrambleText: {
+                            text: htmlChar.innerText,
+                            chars: '01#@*&%',
+                            revealDelay: 0.2,
+                            speed: 0.5,
+                        },
+                    },
+                    '<0.05', // Overlap characters for the "computing" flow
+                );
+            });
+
+            // 4. Add Skill Cards Animation
+            // Using "-=0.2" makes the cards start appearing just before the text finishes scrambling
+            tl.from(
+                contactCards,
+                {
+                    opacity: 0, // Starts fully transparent
+                    y: 30, // Subtle slide up
+                    duration: 1.2, // Longer duration makes the "fade" look smoother
+                    stagger: 0.2, // More time between each card for a clear sequence
+                    ease: 'power1.inOut', // A gentle ease that makes the fade look more natural
+                },
+                '-=0.3', // Starts slightly earlier for better flow
+            );
+        },
+        { scope: sectionRef },
+    );
+
     return (
-        <section className="px-sm-gutter mt-margin-section-large md:px-gutter">
+        <section
+            ref={sectionRef}
+            className="px-sm-gutter mt-margin-section-large md:px-gutter"
+        >
             <div className="bg-[linear-gradient(to_bottom,rgba(21,9,99,1),rgba(48,27,179,0.7))] border-white rounded-xl md:bg-[linear-gradient(to_right,rgba(21,9,99,1),rgba(48,27,179,0.7))] p-margin-elements-regular">
-                <h1 className="uppercase font-bold text-xl flex gap-margin-sm justify-center md:text-3xl md:items-center text-white ">
+                <h1 className="contact-header uppercase font-bold text-xl flex gap-margin-sm justify-center md:text-3xl md:items-center text-white ">
                     <MessageSquareText className="text-white" />
                     Get In Touch
                 </h1>
-                <section className="md:flex md:justify-between md:items-center md:p-margin-elements-regular">
+                <section
+                    ref={boxRef}
+                    className="md:flex md:justify-between md:items-center md:p-margin-elements-regular"
+                >
                     <div className="flex flex-col">
                         <h4 className="text-2xl font-bold text-white text-center mt-margin-section-regular md:text-start">
                             HAVE A PROJECT?
