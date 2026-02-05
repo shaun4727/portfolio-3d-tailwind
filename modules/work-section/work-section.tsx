@@ -79,64 +79,34 @@ export const WorkSection = () => {
             });
 
             const cards = gsap.utils.toArray('.image-card');
-            const section = sectionRef.current;
-            if (!section) return;
 
             cards.forEach((card) => {
                 const el = card as HTMLElement;
-                // Look for the image specifically
                 const img = el.querySelector('.project-image');
 
                 if (!img) return;
 
-                const hoverAnim = gsap.to(img, {
-                    x: () => {
-                        const sectionRect = section.getBoundingClientRect();
-                        const imgRect = img.getBoundingClientRect();
-                        const cardRect = el.getBoundingClientRect();
-
-                        const sectionMid =
-                            sectionRect.left + sectionRect.width / 2;
-                        const cardMid = cardRect.left + cardRect.width / 2;
-
-                        const scaleMultiplier = 1.6;
-                        // Calculate how much wider the image gets: (Original Width * 0.6) / 2
-                        const extraWidth =
-                            (imgRect.width * (scaleMultiplier - 1)) / 2;
-
-                        if (cardMid < sectionMid) {
-                            // Move Right: Section Right - Image Right - Buffer - Scaled extra width
-                            return (
-                                sectionRect.right -
-                                imgRect.right -
-                                40 -
-                                extraWidth
-                            );
-                        } else {
-                            // Move Left: Section Left - Image Left + Buffer + Scaled extra width
-                            return (
-                                sectionRect.left -
-                                imgRect.left +
-                                40 +
-                                extraWidth
-                            );
-                        }
-                    },
+                // Simple scale animation centered on the image's original position
+                const hoverAnim = gsap.to(el, {
                     scale: 1.6,
                     zIndex: 100,
                     duration: 0.5,
                     paused: true,
                     ease: 'power2.out',
-                    immediateRender: false,
+                    // transformOrigin: "center center" is default,
+                    // but you can specify it if needed
+                    transformOrigin: 'center center',
                 });
 
                 el.addEventListener('mouseenter', () => {
-                    // Ensure parent doesn't hide the scaling image
+                    // We raise the z-index of the whole card container so the
+                    // scaled image overlaps neighboring cards
                     gsap.set(el, { zIndex: 50 });
                     hoverAnim.play();
                 });
 
                 el.addEventListener('mouseleave', () => {
+                    // Reset z-index so it returns to the normal document flow
                     gsap.set(el, { zIndex: 1 });
                     hoverAnim.reverse();
                 });
@@ -155,11 +125,11 @@ export const WorkSection = () => {
                 WORK I HAVE DONE
             </h1>
             <div ref={boxRef} className="md:grid md:grid-cols-3 gap-4">
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image"
+                        className="w-80 md:w-100 project-image mx-auto"
                         width="800"
                         height="600"
                     />
@@ -181,11 +151,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image"
+                        className="w-80 md:w-100 project-image mx-auto"
                         width="800"
                         height="600"
                     />
@@ -207,11 +177,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image"
+                        className="w-80 md:w-100 project-image mx-auto"
                         width="800"
                         height="600"
                     />
@@ -233,11 +203,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image"
+                        className="w-80 md:w-100 project-image mx-auto"
                         width="800"
                         height="600"
                     />
@@ -259,11 +229,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image"
+                        className="w-80 md:w-100 project-image mx-auto"
                         width="800"
                         height="600"
                     />
