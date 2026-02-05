@@ -98,7 +98,7 @@ export const HeroSection = () => {
                             TO
                             <span className="text-primary-color"> LIFE </span>
                         </h4>
-                        <Button className="bg-button-color hero-button">
+                        <Button className="bg-button-color hero-button hover:bg-primary-color transition-colors duration-300">
                             Download Resume
                         </Button>
                     </div>

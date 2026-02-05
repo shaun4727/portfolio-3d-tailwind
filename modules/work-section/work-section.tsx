@@ -105,7 +105,7 @@ export const WorkSection = () => {
                             </span>
                         </h4>
                         <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4">
+                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
                                 View Project
                             </Button>
                         </div>
@@ -131,7 +131,7 @@ export const WorkSection = () => {
                             </span>
                         </h4>
                         <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4">
+                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
                                 View Project
                             </Button>
                         </div>
@@ -157,7 +157,7 @@ export const WorkSection = () => {
                             </span>
                         </h4>
                         <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4">
+                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
                                 View Project
                             </Button>
                         </div>
@@ -183,7 +183,7 @@ export const WorkSection = () => {
                             </span>
                         </h4>
                         <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4">
+                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
                                 View Project
                             </Button>
                         </div>
@@ -209,7 +209,7 @@ export const WorkSection = () => {
                             </span>
                         </h4>
                         <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4">
+                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
                                 View Project
                             </Button>
                         </div>
