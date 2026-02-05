@@ -71,6 +71,76 @@ export const WorkSection = () => {
                 },
                 '-=0.2',
             );
+
+            gsap.set('.project-image', {
+                display: 'block',
+                position: 'relative',
+                zIndex: 1,
+            });
+
+            const cards = gsap.utils.toArray('.image-card');
+            const section = sectionRef.current;
+            if (!section) return;
+
+            cards.forEach((card) => {
+                const el = card as HTMLElement;
+                // Look for the image specifically
+                const img = el.querySelector('.project-image');
+
+                if (!img) return;
+
+                const hoverAnim = gsap.to(img, {
+                    x: () => {
+                        const sectionRect = section.getBoundingClientRect();
+                        const imgRect = img.getBoundingClientRect();
+                        const cardRect = el.getBoundingClientRect();
+
+                        const sectionMid =
+                            sectionRect.left + sectionRect.width / 2;
+                        const cardMid = cardRect.left + cardRect.width / 2;
+
+                        const scaleMultiplier = 1.6;
+                        // Calculate how much wider the image gets: (Original Width * 0.6) / 2
+                        const extraWidth =
+                            (imgRect.width * (scaleMultiplier - 1)) / 2;
+
+                        if (cardMid < sectionMid) {
+                            // Move Right: Section Right - Image Right - Buffer - Scaled extra width
+                            return (
+                                sectionRect.right -
+                                imgRect.right -
+                                40 -
+                                extraWidth
+                            );
+                        } else {
+                            // Move Left: Section Left - Image Left + Buffer + Scaled extra width
+                            return (
+                                sectionRect.left -
+                                imgRect.left +
+                                40 +
+                                extraWidth
+                            );
+                        }
+                    },
+                    scale: 1.6,
+                    zIndex: 100,
+                    duration: 0.5,
+                    paused: true,
+                    ease: 'power2.out',
+                    immediateRender: false,
+                });
+
+                el.addEventListener('mouseenter', () => {
+                    // Ensure parent doesn't hide the scaling image
+                    gsap.set(el, { zIndex: 50 });
+                    hoverAnim.play();
+                });
+
+                el.addEventListener('mouseleave', () => {
+                    gsap.set(el, { zIndex: 1 });
+                    hoverAnim.reverse();
+                });
+            });
         },
         { scope: sectionRef },
     );
@@ -85,11 +155,11 @@ export const WorkSection = () => {
                 WORK I HAVE DONE
             </h1>
             <div ref={boxRef} className="md:grid md:grid-cols-3 gap-4">
-                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100"
+                        className="w-80 md:w-100 project-image"
                         width="100"
                         height="100"
                     />
@@ -111,11 +181,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100"
+                        className="w-80 md:w-100 project-image"
                         width="100"
                         height="100"
                     />
@@ -137,11 +207,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100"
+                        className="w-80 md:w-100 project-image"
                         width="100"
                         height="100"
                     />
@@ -163,11 +233,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100"
+                        className="w-80 md:w-100 project-image"
                         width="100"
                         height="100"
                     />
@@ -189,11 +259,11 @@ export const WorkSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
+                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular">
                     <Image
                         src="/images/project-img.png"
                         alt="project-thumbnail"
-                        className="w-80 md:w-100"
+                        className="w-80 md:w-100 project-image"
                         width="100"
                         height="100"
                     />
