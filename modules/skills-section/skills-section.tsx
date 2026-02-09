@@ -33,7 +33,7 @@ export const SkillsSection = () => {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current, // Triggering based on the section
-                    start: 'top 80%',
+                    start: 'top 90%',
                     toggleActions: 'play none none none',
                 },
             });

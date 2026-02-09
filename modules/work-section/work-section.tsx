@@ -25,21 +25,20 @@ export const WorkSection = () => {
             const split = new SplitText('.work-header', {
                 type: 'chars, words',
             });
-            const workCards = gsap.utils.toArray(boxRef.current!.children);
+            // Target the actual card elements
+            const workCards = gsap.utils.toArray('.image-card');
 
-            // 1. Setup initial states
-            gsap.set(split.chars, { display: 'inline', position: 'relative' });
-
-            // 2. Create a single Timeline
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: sectionRef.current, // Triggering based on the section
-                    start: 'top 100%',
+                    trigger: sectionRef.current,
+                    // "top 85%" means when the top of the section is 85% down the viewport
+                    start: 'top 120%',
                     toggleActions: 'play none none none',
                 },
             });
 
-            // 3. Add Scramble Animation (Loop)
+            // Header Scramble
+            // 3. Add Scramble Animation
             split.chars.forEach((char) => {
                 const htmlChar = char as HTMLElement;
                 tl.to(
@@ -47,74 +46,46 @@ export const WorkSection = () => {
                     {
                         duration: 0.5,
                         scrambleText: {
+                            // ADD THIS LINE:
                             text: htmlChar.innerText,
                             chars: '01#@*&%',
                             revealDelay: 0.05,
                             speed: 0.5,
                         },
                     },
-                    '<0.05', // Overlap characters for the "computing" flow
+                    '<0.05',
                 );
             });
-
-            // 4. Add Skill Cards Animation
-            // Using "-=0.2" makes the cards start appearing just before the text finishes scrambling
+            // Card Entrance
             tl.from(
                 workCards,
                 {
                     opacity: 0,
-                    y: 100, // Increased Y for a more dramatic entrance
-                    scale: 0.5, // Starts at half size for a "zoom in" effect
-                    duration: 1, // Slightly longer duration for smoothness
-                    stagger: 0.15, // Slightly more time between cards
-                    ease: 'back.out(1.7)', // 'back' ease creates a slight "pop" at the end
+                    y: 50,
+                    scale: 0.9,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: 'power3.out',
                 },
                 '-=0.2',
             );
 
+            // Hover Logic (MatchMedia)
             const mm = gsap.matchMedia();
-            const cards = gsap.utils.toArray('.image-card');
-
-            mm.add('(max-width: 768px)', () => {
-                // Mobile logic: Small scale
-                setupCardAnimations(1.1);
-            });
-
             mm.add('(min-width: 769px)', () => {
-                // Desktop logic: Larger scale
-                setupCardAnimations(1.6);
-            });
-
-            function setupCardAnimations(scaleValue: number) {
-                cards.forEach((card) => {
-                    const el = card as HTMLElement;
-                    const hoverAnim = gsap.to(el, {
-                        scale: scaleValue,
-                        duration: 0.5,
-                        paused: true,
-                        ease: 'power2.out',
-                        transformOrigin: 'center center',
+                workCards.forEach((card: any) => {
+                    card.addEventListener('mouseenter', () => {
+                        gsap.to(card, {
+                            scale: 1.05,
+                            zIndex: 10,
+                            duration: 0.3,
+                        });
                     });
-
-                    const onEnter = () => {
-                        gsap.set(el, { zIndex: 50 });
-                        hoverAnim.play();
-                    };
-                    const onLeave = () => {
-                        gsap.set(el, { zIndex: 1 });
-                        hoverAnim.reverse();
-                    };
-
-                    el.addEventListener('mouseenter', onEnter);
-                    el.addEventListener('mouseleave', onLeave);
-
-                    // MatchMedia cleanup: automatically removes listeners when screen resizes
-                    return () => {
-                        el.removeEventListener('mouseenter', onEnter);
-                        el.removeEventListener('mouseleave', onLeave);
-                    };
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(card, { scale: 1, zIndex: 1, duration: 0.3 });
+                    });
                 });
-            }
+            });
         },
         { scope: sectionRef },
     );
@@ -124,142 +95,43 @@ export const WorkSection = () => {
             ref={sectionRef}
             className="px-sm-gutter mt-margin-section-large md:px-gutter"
         >
-            <h1 className="work-header uppercase font-bold text-xl flex gap-margin-sm justify-center md:text-3xl md:items-center mb-margin-section-regular">
-                <ChartBar />
-                WORK I HAVE DONE
+            <h1 className="work-header uppercase font-bold text-3xl mb-12 flex items-center justify-center gap-4">
+                <ChartBar /> WORK I HAVE DONE
             </h1>
-            <div ref={boxRef} className="md:grid md:grid-cols-3 gap-4">
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
-                    <Image
-                        src="/images/project-img.png"
-                        alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image mx-auto"
-                        width="800"
-                        height="600"
-                    />
-                    <div className="mt-margin-elements-regular">
-                        {' '}
-                        <h1 className="font-bold text-xl text-primary-color">
-                            E-commerce Project
-                        </h1>
-                        <h4 className="font-bold mt-2">
-                            Technology Used:{' '}
-                            <span className="font-normal">
-                                Next JS, Node JS, Express, Mongo DB
-                            </span>
-                        </h4>
-                        <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
-                                View Project
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
-                    <Image
-                        src="/images/project-img.png"
-                        alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image mx-auto"
-                        width="800"
-                        height="600"
-                    />
-                    <div className="mt-margin-elements-regular">
-                        {' '}
-                        <h1 className="font-bold text-xl text-primary-color">
-                            E-commerce Project
-                        </h1>
-                        <h4 className="font-bold mt-2">
-                            Technology Used:{' '}
-                            <span className="font-normal">
-                                Next JS, Node JS, Express, Mongo DB
-                            </span>
-                        </h4>
-                        <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
-                                View Project
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
-                    <Image
-                        src="/images/project-img.png"
-                        alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image mx-auto"
-                        width="800"
-                        height="600"
-                    />
-                    <div className="mt-margin-elements-regular">
-                        {' '}
-                        <h1 className="font-bold text-xl text-primary-color">
-                            E-commerce Project
-                        </h1>
-                        <h4 className="font-bold mt-2">
-                            Technology Used:{' '}
-                            <span className="font-normal">
-                                Next JS, Node JS, Express, Mongo DB
-                            </span>
-                        </h4>
-                        <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
-                                View Project
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
-                    <Image
-                        src="/images/project-img.png"
-                        alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image mx-auto"
-                        width="800"
-                        height="600"
-                    />
-                    <div className="mt-margin-elements-regular">
-                        {' '}
-                        <h1 className="font-bold text-xl text-primary-color">
-                            E-commerce Project
-                        </h1>
-                        <h4 className="font-bold mt-2">
-                            Technology Used:{' '}
-                            <span className="font-normal">
-                                Next JS, Node JS, Express, Mongo DB
-                            </span>
-                        </h4>
-                        <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
-                                View Project
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-                <div className="image-card overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)]  rounded-xl p-margin-elements-regular mb-margin-elements-regular hover:border-primary-color hover:border-2">
-                    <Image
-                        src="/images/project-img.png"
-                        alt="project-thumbnail"
-                        className="w-80 md:w-100 project-image mx-auto"
-                        width="800"
-                        height="600"
-                    />
-                    <div className="mt-margin-elements-regular">
-                        {' '}
-                        <h1 className="font-bold text-xl text-primary-color">
-                            E-commerce Project
-                        </h1>
-                        <h4 className="font-bold mt-2">
-                            Technology Used:{' '}
-                            <span className="font-normal">
-                                Next JS, Node JS, Express, Mongo DB
-                            </span>
-                        </h4>
-                        <div className="flex justify-center mt-3">
-                            <Button className="bg-button-color w-3/4 hero-button hover:bg-primary-color transition-colors duration-300">
-                                View Project
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+
+            {/* Grid fix: Use items-stretch to keep heights uniform in a row */}
+            <div
+                ref={boxRef}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+            >
+                <Card title="E-commerce Project" tech="Next JS, MongoDB" />
+                <Card title="AI Dashboard" tech="Python, React" />
+                <Card title="Portfolio" tech="GSAP, Next JS" />
             </div>
         </section>
     );
 };
+
+// Helper Component to keep code clean and handle varying content
+const Card = ({ title, tech }: { title: string; tech: string }) => (
+    <div className="image-card flex flex-col h-full overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] rounded-xl p-6 border border-transparent hover:border-primary-color transition-colors">
+        <div className="grow">
+            <Image
+                src="/images/project-img.png"
+                alt="thumb"
+                width={800}
+                height={600}
+                className="rounded-lg"
+            />
+            <h1 className="font-bold text-xl text-primary-color mt-4">
+                {title}
+            </h1>
+            <p className="text-sm mt-2 font-bold">
+                Tech: <span className="font-normal">{tech}</span>
+            </p>
+        </div>
+        <Button className="mt-6 w-full bg-button-color hover:bg-primary-color">
+            View Project
+        </Button>
+    </div>
+);
