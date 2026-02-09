@@ -48,7 +48,7 @@ export const SkillsSection = () => {
                         scrambleText: {
                             text: htmlChar.innerText,
                             chars: '01#@*&%',
-                            revealDelay: 0.2,
+                            revealDelay: 0.05,
                             speed: 0.5,
                         },
                     },
@@ -97,6 +97,26 @@ export const SkillsSection = () => {
                     />
                     <h5>NEXT JS</h5>
                 </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular ">
+                    <Image
+                        src="/images/skill-icons_typescript.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>TYPESCRIPT</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular ">
+                    <Image
+                        src="/images/react-js.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>REACT</h5>
+                </div>
 
                 <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular ">
                     <Image
@@ -107,6 +127,16 @@ export const SkillsSection = () => {
                         height="100"
                     />
                     <h5>VUE JS</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular ">
+                    <Image
+                        src="/images/vscode-icons_file-type-tailwind.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>TAILWIND</h5>
                 </div>
                 <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular ">
                     <Image
@@ -150,6 +180,27 @@ export const SkillsSection = () => {
                 </div>
                 <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
                     <Image
+                        src="/images/logos_postgresql.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>POSTGRESQL</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
+                    <Image
+                        src="/images/prisma.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>PRISMA</h5>
+                </div>
+
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
+                    <Image
                         src="/images/redux-js.png"
                         alt="skill-logo"
                         className="skill-logo"
@@ -157,6 +208,36 @@ export const SkillsSection = () => {
                         height="100"
                     />
                     <h5>REDUX JS</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
+                    <Image
+                        src="/images/docker.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>DOCKER</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
+                    <Image
+                        src="/images/figma.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>FIGMA</h5>
+                </div>
+                <div className="bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] h-62.5 flex flex-col gap-4 justify-center items-center border border-primary-color/30 rounded-xl mb-margin-elements-regular">
+                    <Image
+                        src="/images/git.png"
+                        alt="skill-logo"
+                        className="skill-logo"
+                        width="100"
+                        height="100"
+                    />
+                    <h5>GIT</h5>
                 </div>
             </div>
             <section className="flex justify-end">

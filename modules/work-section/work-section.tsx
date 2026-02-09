@@ -34,7 +34,7 @@ export const WorkSection = () => {
             const tl = gsap.timeline({
                 scrollTrigger: {
                     trigger: sectionRef.current, // Triggering based on the section
-                    start: 'top 80%',
+                    start: 'top 100%',
                     toggleActions: 'play none none none',
                 },
             });
@@ -49,7 +49,7 @@ export const WorkSection = () => {
                         scrambleText: {
                             text: htmlChar.innerText,
                             chars: '01#@*&%',
-                            revealDelay: 0.2,
+                            revealDelay: 0.05,
                             speed: 0.5,
                         },
                     },
