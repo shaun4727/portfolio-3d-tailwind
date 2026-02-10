@@ -8,6 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { ChartBar } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRef } from 'react';
 
 if (typeof window !== 'undefined') {
@@ -104,20 +105,45 @@ export const WorkSection = () => {
                 ref={boxRef}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
             >
-                <Card title="E-commerce Project" tech="Next JS, MongoDB" />
-                <Card title="AI Dashboard" tech="Python, React" />
-                <Card title="Portfolio" tech="GSAP, Next JS" />
+                <Card
+                    title="E-commerce Project"
+                    tech="Next JS, MongoDB, Node JS, TypeScript, ShadCn"
+                    imageName="emart.png"
+                    link="https://advanced-e-commerce-client.vercel.app/"
+                />
+                <Card
+                    title="YouTube Clone"
+                    tech="Next JS, Postgresql, Prisma, ShadCN"
+                    imageName="youtube-clone.png"
+                    link="https://you-tube-clone-rose-alpha.vercel.app/"
+                />
+                <Card
+                    title="Calendra"
+                    tech="Next JS, Postgresql, Prisma, ShadCN"
+                    imageName="calendra.png"
+                    link="https://calendra-project-gzty.vercel.app/"
+                />
             </div>
         </section>
     );
 };
 
 // Helper Component to keep code clean and handle varying content
-const Card = ({ title, tech }: { title: string; tech: string }) => (
+const Card = ({
+    title,
+    tech,
+    imageName,
+    link,
+}: {
+    title: string;
+    tech: string;
+    imageName: string;
+    link: string;
+}) => (
     <div className="image-card flex flex-col h-full overflow-visible bg-[linear-gradient(35deg,rgba(72,197,180,0.45)_65%,rgba(255,255,255,1)_98%)] rounded-xl p-6 border border-transparent hover:border-primary-color transition-colors">
         <div className="grow">
             <Image
-                src="/images/project-img.png"
+                src={`/project-img/${imageName}`}
                 alt="thumb"
                 width={800}
                 height={600}
@@ -130,8 +156,11 @@ const Card = ({ title, tech }: { title: string; tech: string }) => (
                 Tech: <span className="font-normal">{tech}</span>
             </p>
         </div>
-        <Button className="mt-6 w-full bg-button-color hover:bg-primary-color">
-            View Project
+        <Button
+            className="mt-6 w-full bg-button-color hover:bg-primary-color"
+            asChild
+        >
+            <Link href={link}>View Project</Link>
         </Button>
     </div>
 );
