@@ -1,5 +1,6 @@
 'use client';
 
+import { sendEmail } from '@/app/actions/sendmail';
 import { Button } from '@/components/ui/button';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -9,7 +10,7 @@ import { SplitText } from 'gsap/SplitText';
 
 import { Mail, MessageSquareText } from 'lucide-react';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useActionState, useRef } from 'react';
 
 if (typeof window !== 'undefined') {
     gsap.registerPlugin(SplitText, ScrambleTextPlugin);
@@ -20,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger);
 export const MessageSection = () => {
     const sectionRef = useRef<HTMLDivElement>(null);
     const boxRef = useRef<HTMLDivElement>(null);
+    const [state, formAction, isPending] = useActionState(sendEmail, null);
 
     useGSAP(
         () => {
@@ -151,61 +153,81 @@ export const MessageSection = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white mt-margin-section-large border-white rounded-xl p-2">
-                        <div className="">
+                    <form
+                        action={formAction}
+                        className="w-1/2 bg-white mt-margin-section-large border-white rounded-xl"
+                    >
+                        <div className="p-4">
                             <h5 className="text-xl font-bold text-center">
                                 Contact Me
                             </h5>
+
+                            {/* Full Name */}
                             <div className="bg-[#f1f1f1] flex gap-2 p-2 border rounded-xl mb-4">
-                                <Image
+                                <img
                                     src="/images/mdi_contact.png"
-                                    alt="contact-icon"
-                                    width={100}
-                                    height={100}
-                                    className="w-6.25 h-6.25"
+                                    alt="icon"
+                                    className="w-6 h-6"
                                 />
                                 <input
+                                    name="name" // IMPORTANT
                                     type="text"
-                                    className="w-full focus:outline-none focus:ring-0 focus:border-transparent"
+                                    required
+                                    className="w-full bg-transparent focus:outline-none"
                                     placeholder="Full Name"
                                 />
                             </div>
+
+                            {/* Email */}
                             <div className="bg-[#f1f1f1] flex gap-2 p-2 border rounded-xl mb-4">
-                                <Image
+                                <img
                                     src="/images/basil_gmail-solid.png"
-                                    alt="gmail-icon"
-                                    width={100}
-                                    height={100}
-                                    className="w-6.25 h-6.25"
+                                    alt="icon"
+                                    className="w-6 h-6"
                                 />
                                 <input
-                                    type="text"
-                                    className="w-full focus:outline-none focus:ring-0 focus:border-transparent"
+                                    name="email" // IMPORTANT
+                                    type="email"
+                                    required
+                                    className="w-full bg-transparent focus:outline-none"
                                     placeholder="Email"
                                 />
                             </div>
+
+                            {/* Message */}
                             <div className="bg-[#f1f1f1] flex gap-2 p-2 border rounded-xl mb-4">
-                                <Image
+                                <img
                                     src="/images/mdi_message.png"
-                                    alt="message-icon"
-                                    width={100}
-                                    height={100}
-                                    className="w-6.25 h-6.25"
+                                    alt="icon"
+                                    className="w-6 h-6"
                                 />
                                 <textarea
-                                    name=""
-                                    id=""
-                                    className="w-full focus:outline-none focus:ring-0 focus:border-transparent"
+                                    name="message" // IMPORTANT
+                                    className="w-full bg-transparent focus:outline-none"
                                     placeholder="Tell me your product and goal"
                                     rows={7}
-                                    cols={40}
+                                    required
                                 ></textarea>
                             </div>
+                            <Button
+                                type="submit"
+                                disabled={isPending}
+                                className="bg-button-color w-full py-3 rounded-lg text-white hover:bg-primary-color transition-colors duration-300"
+                            >
+                                {isPending ? 'Sending...' : 'Send Message'}
+                            </Button>
+                            {state?.success && (
+                                <p className="text-primary-color mt-4 text-center">
+                                    Email sent successfully!
+                                </p>
+                            )}
+                            {state?.success === false && (
+                                <p className="text-red-500 mt-4 text-center">
+                                    Failed to send email.
+                                </p>
+                            )}
                         </div>
-                        <Button className="bg-button-color w-full hover:bg-primary-color transition-colors duration-300">
-                            Send Message
-                        </Button>
-                    </div>
+                    </form>
                 </section>
             </div>
         </section>
