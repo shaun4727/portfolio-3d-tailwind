@@ -98,8 +98,16 @@ export const HeroSection = () => {
                             TO
                             <span className="text-primary-color"> LIFE </span>
                         </h4>
-                        <Button className="bg-button-color hero-button hover:bg-primary-color transition-colors duration-300">
-                            Download Resume
+                        <Button
+                            className="bg-button-color hero-button hover:bg-primary-color transition-colors duration-300"
+                            asChild
+                        >
+                            <a
+                                href="https://drive.google.com/file/d/1ub6VH0NCfr1z4asVbqa77L1xPUAYNk8J/view?usp=drive_link"
+                                download="Shaun_Hossain.pdf"
+                            >
+                                Download Resume
+                            </a>
                         </Button>
                     </div>
                 </div>

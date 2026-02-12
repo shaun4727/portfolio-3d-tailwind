@@ -155,7 +155,7 @@ export const MessageSection = () => {
                     </div>
                     <form
                         action={formAction}
-                        className="w-1/2 bg-white mt-margin-section-large border-white rounded-xl"
+                        className="md:w-1/2 bg-white mt-margin-section-large border-white rounded-xl"
                     >
                         <div className="p-4">
                             <h5 className="text-xl font-bold text-center">

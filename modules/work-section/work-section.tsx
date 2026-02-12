@@ -96,7 +96,7 @@ export const WorkSection = () => {
             ref={sectionRef}
             className="px-sm-gutter mt-margin-section-large md:px-gutter"
         >
-            <h1 className="work-header uppercase font-bold text-3xl mb-12 flex items-center justify-center gap-4">
+            <h1 className="work-header uppercase font-bold text-xl flex gap-margin-sm justify-center md:text-3xl md:items-center mb-4">
                 <ChartBar /> WORK I HAVE DONE
             </h1>
 
