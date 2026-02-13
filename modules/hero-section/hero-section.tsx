@@ -7,6 +7,7 @@ import { useRef } from 'react';
 // --- ADD THESE IMPORTS ---
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import Link from 'next/link';
 
 // Register the plugin
 if (typeof window !== 'undefined') {
@@ -151,27 +152,31 @@ export const HeroSection = () => {
                         </p>
                     </div>
                     <div className="flex gap-margin-sm justify-end mt-margin-sm md:mt-margin-elements-regular ">
-                        <Image
-                            src="/images/github-icon.png"
-                            alt="github-icon"
-                            width="100"
-                            height="100"
-                            className="w-6.25 h-6.25"
-                        />
-                        <Image
+                        <Link href="https://github.com/shaun4727">
+                            <Image
+                                src="/images/github-icon.png"
+                                alt="github-icon"
+                                width="100"
+                                height="100"
+                                className="w-6.25 h-6.25"
+                            />
+                        </Link>
+                        <Link href="https://www.linkedin.com/in/shaun-hossain-4361b4135">
+                            <Image
+                                src="/images/linkedIn-icon.png"
+                                alt="linkedIn-icon"
+                                width="100"
+                                height="100"
+                                className="w-6.25 h-6.25"
+                            />
+                        </Link>
+                        {/* <Image
                             src="/images/gmail-icon.png"
                             alt="gmail-icon"
                             width="100"
                             height="100"
                             className="w-6.25 h-6.25"
-                        />
-                        <Image
-                            src="/images/linkedIn-icon.png"
-                            alt="linkedIn-icon"
-                            width="100"
-                            height="100"
-                            className="w-6.25 h-6.25"
-                        />
+                        /> */}
                     </div>
                 </div>
             </section>
